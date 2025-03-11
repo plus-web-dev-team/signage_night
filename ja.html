@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>レスポンシブ対応クリッカブルマップ</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <img src="img/header.svg" alt="" />
+    </header>
+    <div class="responsive-container">
+      <img src="img/ja_night_01.jpg" alt="" class="responsiveImage" />
+      <img src="img/ja_night_02.jpg" alt="" class="responsiveImage" />
+      <img src="img/ja_night_03.jpg" alt="" class="responsiveImage" />
+      <img src="img/ja_night_04.jpg" alt="" class="responsiveImage" />
+      <img src="img/ja_night_05.jpg" alt="" class="responsiveImage" />
+
+      <a href="en.html" id="enLink">
+        <img src="img/en_menu.svg" alt="" class="upper-menu" />
+      </a>
+      <audio id="enAudio" src="audio/welcome.mp3" preload="auto"></audio>
+      <a href="ch.html" id="chLink">
+        <img src="img/ch_menu.svg" alt="" class="down-menu" />
+      </a>
+      <audio id="chAudio" src="audio/nihao.mp3" preload="auto"></audio>
+      <a href="ja-side.html">
+        <img src="img/side_menu.svg" alt="" class="side-menu" />
+      </a>
+    </div>
+    <script src="js/voice.js"></script>
+    <script>
+      // ページのどこでもクリックを検知して親ウィンドウに通知する
+      document.addEventListener("click", function (event) {
+        // 親ウィンドウにメッセージを送信
+        window.parent.postMessage("iframeClicked", "*");
+      });
+    </script>
+  </body>
+</html>

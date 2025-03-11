@@ -1,0 +1,192 @@
+.responsive-container {
+	position: relative;
+	width: 100%;
+	margin: 0 auto;
+	overflow-x: hidden;
+}
+
+.blink-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: 10;
+}
+
+.responsiveImage {
+	position: relative;
+	z-index: 1;
+}
+
+.blink {
+	position: absolute;
+	border-radius: 50%;
+	background-color: rgba(255, 255, 0, 0.3);
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.blink6 {
+	border-radius: 50%;
+}
+
+@keyframes blink {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+}
+
+.highlight {
+	animation: blink-animation 1s infinite;
+}
+
+@keyframes blink-animation {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.upper-menu {
+	width: 550px;
+	height: 550px;
+	position: absolute;
+	z-index: 99;
+	top: 30%;
+	right: -3%;
+	transform: translate(3%, -30%);
+}
+
+.down-menu {
+	width: 550px;
+	height: 550px;
+	position: absolute;
+	z-index: 99;
+	top: 45%;
+	right: -3%;
+	transform: translate(3%, -45%);
+}
+
+.runch-menu {
+	width: 661px;
+	height: 80px;
+	position: absolute;
+	z-index: 99;
+	bottom: 10%;
+	left:50%;
+	transform: translate(-50%, -10%);
+}
+
+.night-menu {
+	width: 661px;
+	height: 80px;
+	position: absolute;
+	z-index: 99;
+	bottom: 10%;
+	right: 6.5%;
+	transform: translate(-6.5%, -10%);
+}
+
+.side-menu {
+	width: 280px;
+	height: 280px;
+	position: absolute;
+	z-index: 99;
+	bottom: 1%;
+	right: 0.5%;
+	transform: translate(-0.5%, -1%);
+}
+
+.for_ramen {
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	z-index: 99;
+	top: 60%;
+	right: 0;
+	transform: translate(0%, -60%);
+}
+
+.for_side_dish {
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	z-index: 99;
+	top: 70%;
+	right: 0;
+	transform: translate(0%, -70%);
+}
+
+.for_spicy_ramen {
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	z-index: 99;
+	top: 80%;
+	right: 0;
+	transform: translate(0%, -80%);
+}
+
+.for_drinks {
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	z-index: 99;
+	top: 90%;
+	right: 0;
+	transform: translate(0%, -90%);
+}
+
+.return_menu {
+	width: 550px;
+	height: 550px;
+	position: absolute;
+	z-index: 99;
+	top: 35%;
+	right: -3%;
+	transform: translate(3%, -38%);
+}
+
+.ch_ramen_buttonWrapper {
+	width: auto;
+	height: auto;
+	position: absolute;
+	z-index: 99;
+	top: 55%;
+	right: -2%;
+	transform: translate(2%, -55%);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	margin-top: 20px;
+	& img {
+		width: 300px;
+		height: 300px;
+	}
+}
+
+.return_menu_chlid {
+	width: 450px !important;
+	height: 450px !important;
+}
+/* 
+a img {
+	transition: transform 0.1s ease;
+}
+
+a:active img {
+	transform: scale(0.98);
+} */

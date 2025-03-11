@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>レスポンシブ対応クリッカブルマップ</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <img src="img/header.svg" alt="" />
+    </header>
+    <div class="responsive-container">
+      <img src="img/en_01.jpg" alt="" class="responsiveImage" />
+      <img src="img/en_02.jpg" alt="" class="responsiveImage" />
+      <img src="img/en_03.jpg" alt="" class="responsiveImage" />
+      <img src="img/en_04.jpg" alt="" class="responsiveImage" />
+      <img src="img/en_05.jpg" alt="" class="responsiveImage" />
+
+      <a href="ch.html" id="enLink">
+        <img src="img/ch_menu.svg" alt="" class="upper-menu" />
+      </a>
+      <audio id="enAudio" src="audio/nihao.mp3" preload="auto"></audio>
+      <a href="ja.html" id="chLink">
+        <img src="img/ja_menu.svg" alt="" class="down-menu" />
+      </a>
+      <audio id="chAudio" src="audio/irassyaimase.mp3" preload="auto"></audio>
+      <a href="en-ramen.html">
+        <img src="img/for_ramen.svg" alt="" class="for_ramen" />
+      </a>
+      <a href="en-side-dish.html">
+        <img src="img/for_side_dish.svg" alt="" class="for_side_dish" />
+      </a>
+      <a href="en-spicy-ramen.html">
+        <img src="img/for_spicy_ramen.svg" alt="" class="for_spicy_ramen" />
+      </a>
+      <a href="en-drinks.html">
+        <img src="img/for_drinks.svg" alt="" class="for_drinks" />
+      </a>
+    </div>
+    <script src="js/voice.js"></script>
+    <script>
+      // ページのどこでもクリックを検知して親ウィンドウに通知する
+      document.addEventListener("click", function (event) {
+        // 親ウィンドウにメッセージを送信
+        window.parent.postMessage("iframeClicked", "*");
+      });
+    </script>
+  </body>
+</html>
