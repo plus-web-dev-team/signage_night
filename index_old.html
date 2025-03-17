@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      3/14 10:23 金丸社長の要望によりページ遷移停止 デジタルサイネージ -
+      自動ページ切り替えシステム
+    </title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+      }
+      #pageFrame {
+        width: 100%;
+        height: 100%;
+        border: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+      }
+      #controls {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 10px;
+        border-radius: 5px;
+        color: white;
+        z-index: 0;
+        font-family: sans-serif;
+      }
+      button {
+        margin: 0 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+      #timer {
+        margin-left: 10px;
+      }
+      .control-row {
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+      }
+      #statusMessage {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 10px;
+        border-radius: 5px;
+        color: white;
+        z-index: 2000;
+        font-family: sans-serif;
+        display: none;
+      }
+      #interactionOverlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1000; /* iframeより上、controlsより下 */
+        display: none; /* デフォルトでは非表示 */
+        cursor: pointer;
+        background-color: transparent;
+        pointer-events: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ステータスメッセージを最上位に -->
+    <div id="statusMessage"></div>
+
+    <!-- iframeをラップする要素 -->
+    <div
+      id="iframeWrapper"
+      style="position: relative; width: 100%; height: 100%"
+    >
+      <!-- オーバーレイ（コンテンツ操作が無効の時のみ表示） -->
+      <div id="interactionOverlay"></div>
+
+      <!-- iframe -->
+      <iframe id="pageFrame" src="ja.html" allowtransparency="true"></iframe>
+    </div>
+
+    <div id="controls">
+      <div class="control-row">
+        <button id="toggleBtn" onclick="toggleRotation()">一時停止</button>
+        <span id="timer">次の切り替えまで: 10秒</span>
+      </div>
+      <div class="control-row">
+        <button onclick="changePage('ja.html')">日本語</button>
+        <button onclick="changePage('en.html')">英語</button>
+        <button onclick="changePage('ch.html')">中国語</button>
+      </div>
+      <div class="control-row">
+        <label for="intervalInput">切り替え間隔 (秒): </label>
+        <input
+          type="number"
+          id="intervalInput"
+          min="1"
+          value="60"
+          style="width: 60px"
+        />
+      </div>
+      <div class="control-row">
+        <label for="idleTimeInput">アイドル時間 (秒): </label>
+        <input
+          type="number"
+          id="idleTimeInput"
+          min="5"
+          value="30"
+          style="width: 60px"
+        />
+      </div>
+      <div class="control-row">
+        <button onclick="toggleControls()">コントロールを隠す</button>
+      </div>
+      <div class="control-row">
+        <label>
+          <input
+            type="checkbox"
+            id="contentInteractionToggle"
+            onclick="toggleContentInteraction()"
+            checked
+          />
+          コンテンツ操作を有効にする
+        </label>
+      </div>
+    </div>
+    <script src="js/index.js"></script>
+  </body>
+</html>
