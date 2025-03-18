@@ -14,5 +14,8 @@
 	"devDependencies": {
 		"browser-sync": "^3.0.3",
 		"markuplint": "^4.11.4"
+	},
+	"dependencies": {
+		"chalk": "^5.4.1"
 	}
 }

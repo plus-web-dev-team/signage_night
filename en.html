@@ -6,41 +6,127 @@
     <title>レスポンシブ対応クリッカブルマップ</title>
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <style>
+      #videoContainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #introVideo {
+        max-width: 100%;
+        max-height: 100%;
+      }
+      #mainContent {
+        display: none;
+      }
+    </style>
   </head>
   <body>
-    <header>
-      <img src="img/header.svg" alt="" />
-    </header>
-    <div class="responsive-container">
-      <img src="img/en_01.jpg" alt="" class="responsiveImage" />
-      <img src="img/en_02.jpg" alt="" class="responsiveImage" />
-      <img src="img/en_03.jpg" alt="" class="responsiveImage" />
-      <img src="img/en_04.jpg" alt="" class="responsiveImage" />
-      <img src="img/en_05.jpg" alt="" class="responsiveImage" />
-
-      <a href="ch.html" id="enLink">
-        <img src="img/ch_menu.svg" alt="" class="upper-menu" />
-      </a>
-      <audio id="enAudio" src="audio/nihao.mp3" preload="auto"></audio>
-      <a href="ja.html" id="chLink">
-        <img src="img/ja_menu.svg" alt="" class="down-menu" />
-      </a>
-      <audio id="chAudio" src="audio/irassyaimase.mp3" preload="auto"></audio>
-      <a href="en-ramen.html">
-        <img src="img/for_ramen.svg" alt="" class="for_ramen" />
-      </a>
-      <a href="en-side-dish.html">
-        <img src="img/for_side_dish.svg" alt="" class="for_side_dish" />
-      </a>
-      <a href="en-spicy-ramen.html">
-        <img src="img/for_spicy_ramen.svg" alt="" class="for_spicy_ramen" />
-      </a>
-      <a href="en-drinks.html">
-        <img src="img/for_drinks.svg" alt="" class="for_drinks" />
-      </a>
+    <!-- 動画コンテナ -->
+    <div id="videoContainer">
+      <video id="introVideo" src="video/wagyu.mp4" autoplay muted playsinline>
+        お使いのブラウザは動画タグをサポートしていません。
+      </video>
     </div>
+
+    <!-- メインコンテンツ -->
+    <div id="mainContent">
+      <header>
+        <img src="img/header.svg" alt="" />
+      </header>
+      <div class="responsive-container">
+        <img src="img/en_01.jpg" alt="" class="responsiveImage" />
+        <img src="img/en_02.jpg" alt="" class="responsiveImage" />
+        <img src="img/en_03.jpg" alt="" class="responsiveImage" />
+        <img src="img/en_04.jpg" alt="" class="responsiveImage" />
+        <img src="img/en_05.jpg" alt="" class="responsiveImage" />
+
+        <a href="ch.html" id="enLink">
+          <img src="img/ch_menu.svg" alt="" class="upper-menu" />
+        </a>
+        <audio id="enAudio" src="audio/nihao.mp3" preload="auto"></audio>
+        <a href="index.html" id="chLink">
+          <img src="img/ja_menu.svg" alt="" class="down-menu" />
+        </a>
+        <audio id="chAudio" src="audio/irassyaimase.mp3" preload="auto"></audio>
+        <a href="en-ramen.html">
+          <img src="img/for_ramen.svg" alt="" class="for_ramen" />
+        </a>
+        <a href="en-side-dish.html">
+          <img src="img/for_side_dish.svg" alt="" class="for_side_dish" />
+        </a>
+        <a href="en-spicy-ramen.html">
+          <img src="img/for_spicy_ramen.svg" alt="" class="for_spicy_ramen" />
+        </a>
+        <a href="en-drinks.html">
+          <img src="img/for_drinks.svg" alt="" class="for_drinks" />
+        </a>
+      </div>
+    </div>
+
     <script src="js/voice.js"></script>
     <script>
+      // 動画関連の処理
+      document.addEventListener("DOMContentLoaded", function () {
+        // デジタルサイネージ用に自動再生を確実にする
+        const playPromise = document.getElementById("introVideo").play();
+
+        // 自動再生が失敗した場合の対応
+        if (playPromise !== undefined) {
+          playPromise.catch((error) => {
+            console.error("自動再生に失敗しました:", error);
+            // 自動再生が失敗した場合は直接コンテンツを表示
+            document.getElementById("videoContainer").style.display = "none";
+            document.getElementById("mainContent").style.display = "block";
+          });
+        }
+        const videoContainer = document.getElementById("videoContainer");
+        const introVideo = document.getElementById("introVideo");
+        const mainContent = document.getElementById("mainContent");
+
+        // 動画のパスを設定する関数（動画を入れ替える場合に使用）
+        function setVideoSource(videoPath) {
+          introVideo.src = videoPath;
+          introVideo.load(); // 新しいソースを読み込む
+        }
+
+        // 動画の再生が終了したらメインコンテンツを表示
+        introVideo.addEventListener("ended", function () {
+          videoContainer.style.display = "none";
+          mainContent.style.display = "block";
+        });
+
+        // 動画が再生できない場合や読み込みエラーの場合もコンテンツを表示
+        introVideo.addEventListener("error", function () {
+          videoContainer.style.display = "none";
+          mainContent.style.display = "block";
+          console.error("動画の読み込みに失敗しました");
+        });
+
+        // スキップボタンの実装（必要に応じてコメントを外して使用）
+        /*
+        const skipButton = document.createElement('button');
+        skipButton.textContent = '動画をスキップ';
+        skipButton.style.position = 'absolute';
+        skipButton.style.bottom = '20px';
+        skipButton.style.right = '20px';
+        skipButton.style.padding = '10px';
+        skipButton.style.zIndex = '1001';
+        skipButton.addEventListener('click', function() {
+          videoContainer.style.display = 'none';
+          mainContent.style.display = 'block';
+        });
+        videoContainer.appendChild(skipButton);
+        */
+      });
+
       // ページのどこでもクリックを検知して親ウィンドウに通知する
       document.addEventListener("click", function (event) {
         // 親ウィンドウにメッセージを送信
